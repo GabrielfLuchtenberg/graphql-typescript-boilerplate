@@ -3,17 +3,21 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
-    "ts-node": "8.2.0",
     "@types/node": "^12.0.7",
+    "nodemon": "^1.19.1",
+    "ts-node": "8.2.0",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "3.5.1"
   },
   "dependencies": {
-    "typeorm": "0.2.18",
+    "graphql-yoga": "^1.17.4",
+    "pg": "^7.11.0",
     "reflect-metadata": "^0.1.13",
-    "pg": "^7.11.0"
+    "typeorm": "0.2.18"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "nodemon --exec ts-node src/index.ts",
     "db:start": "docker run --rm   --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data  postgres"
   }
 }
