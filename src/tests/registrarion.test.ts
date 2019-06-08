@@ -1,10 +1,5 @@
-import { createOrmConnection } from "../orm-utils";
 import { User } from "../entity/User";
 import { testRequest } from "./utils";
-
-beforeAll(async () => {
-  await createOrmConnection();
-});
 
 const email = "gab@riel.com";
 const password = "jalksdf";
