@@ -3,21 +3,34 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jest": "^24.0.13",
     "@types/node": "^12.0.7",
+    "@types/uuid": "^3.4.4",
+    "gql2ts": "^1.10.1",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.1",
+    "ts-jest": "^24.0.2",
     "ts-node": "8.2.0",
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "3.5.1"
+    "typescript": "^3.5.1"
   },
   "dependencies": {
+    "graphql-request": "^1.8.2",
+    "bcryptjs": "^2.4.3",
     "graphql-yoga": "^1.17.4",
     "pg": "^7.11.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "0.2.18"
+    "typeorm": "0.2.18",
+    "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "nodemon --exec ts-node src/index.ts",
-    "db:start": "docker run --rm   --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data  postgres"
+    "start": "NODE_ENV=dev nodemon --exec ts-node --files src/index.ts",
+    "build-schema": "gql2ts src/schema.graphql -o src/types/schema.d.ts",
+    "db:start": "docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres",
+    "test": "NODE_ENV=test jest",
+    "test-server": "NODE_ENV=test  ts-node --files src/index.ts",
+    "test:db-start": "docker run --rm --name pg-docker-test -e POSTGRES_DB=postgres-test -e POSTGRES_PASSWORD=docker -d -p 5433:5432 -v $HOME/docker/volumes/postgres-test:/var/lib/postgresql/data postgres"
   }
 }
