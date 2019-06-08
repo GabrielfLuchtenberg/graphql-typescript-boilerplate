@@ -10,6 +10,7 @@
     "gql2ts": "^1.10.1",
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
+    "start-server-and-test": "^1.9.1",
     "ts-jest": "^24.0.2",
     "ts-node": "8.2.0",
     "tslint": "^5.17.0",
@@ -17,8 +18,8 @@
     "typescript": "^3.5.1"
   },
   "dependencies": {
-    "graphql-request": "^1.8.2",
     "bcryptjs": "^2.4.3",
+    "graphql-request": "^1.8.2",
     "graphql-yoga": "^1.17.4",
     "pg": "^7.11.0",
     "reflect-metadata": "^0.1.13",
@@ -29,8 +30,7 @@
     "start": "NODE_ENV=dev nodemon --exec ts-node --files src/index.ts",
     "build-schema": "gql2ts src/schema.graphql -o src/types/schema.d.ts",
     "db:start": "docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres",
-    "test": "NODE_ENV=test jest",
-    "test-server": "NODE_ENV=test  ts-node --files src/index.ts",
+    "test": "NODE_ENV=test jest --forceExit",
     "test:db-start": "docker run --rm --name pg-docker-test -e POSTGRES_DB=postgres-test -e POSTGRES_PASSWORD=docker -d -p 5433:5432 -v $HOME/docker/volumes/postgres-test:/var/lib/postgresql/data postgres"
   }
 }
