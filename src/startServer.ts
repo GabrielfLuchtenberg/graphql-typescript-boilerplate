@@ -4,7 +4,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { mergeSchemas, makeExecutableSchema } from "graphql-tools";
 import { GraphQLSchema } from "graphql";
-import { createOrmConnection } from "./orm-utils";
+import { createOrmConnection } from "./utils/orm-utils";
 
 export const startServer = async () => {
   const schemas: GraphQLSchema[] = [];
