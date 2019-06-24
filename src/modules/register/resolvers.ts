@@ -27,7 +27,11 @@ const resolvers: ResolverMap = {
     bye: () => "bye"
   },
   Mutation: {
-    register: async (_, args: GQL.IRegisterOnMutationArguments) => {
+    register: async (
+      _,
+      args: GQL.IRegisterOnMutationArguments,
+      { redis, url }
+    ) => {
       try {
         await schema.validate(args, { abortEarly: false });
       } catch (e) {
@@ -52,6 +56,7 @@ const resolvers: ResolverMap = {
         password: hashedPassword
       });
       await user.save();
+      await user.createConfirmationLink(url, redis);
       return null;
     }
   }
