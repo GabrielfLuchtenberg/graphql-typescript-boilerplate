@@ -4,6 +4,7 @@
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/ioredis": "^4.0.12",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.7",
     "@types/uuid": "^3.4.4",
@@ -25,16 +26,18 @@
     "graphql-request": "^1.8.2",
     "graphql-tools": "^4.0.4",
     "graphql-yoga": "^1.17.4",
+    "ioredis": "^4.10.0",
     "pg": "^7.11.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "0.2.18",
+    "uuid": "^3.3.2",
     "yup": "^0.27.0"
   },
   "scripts": {
     "start": "NODE_ENV=dev nodemon --exec ts-node --files src/index.ts",
     "build-schema": "gql2ts src/schema.graphql -o src/types/schema.d.ts",
     "db:start": "docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres",
-    "test": "NODE_ENV=test jest --forceExit",
+    "test": "NODE_ENV=test TS_NODE_FILES=true jest --forceExit",
     "test:db-start": "docker run --rm --name pg-docker-test -e POSTGRES_DB=postgres-test -e POSTGRES_PASSWORD=docker -d -p 5433:5432 -v $HOME/docker/volumes/postgres-test:/var/lib/postgresql/data postgres"
   }
 }

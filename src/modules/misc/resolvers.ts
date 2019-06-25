@@ -1,10 +1,10 @@
-import { ResolverMap } from "../../types/graphql-utils";
+// import { ResolverMap } from "../../types/graphql-utils";
 
-const resolvers: ResolverMap = {
-  Query: {
-    hello: (_, { name }: GQL.IHelloOnQueryArguments) =>
-      `Hello ${name || "World"}`
-  }
-};
+// const resolvers: ResolverMap = {
+//   Query: {
+//     hello: (_, { name }: GQL.IHelloOnQueryArguments) =>
+//       `Hello ${name || "World"}`
+//   }
+// };
 
-export { resolvers };
+// export { resolvers };
