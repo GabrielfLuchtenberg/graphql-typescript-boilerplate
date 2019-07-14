@@ -9,6 +9,8 @@ import {
   passwordNotLongEnough,
   emailNotValid
 } from "./error-messages";
+import { sendEmail } from "../../utils/send-email";
+import { NODE_ENV } from "../../process-variables";
 
 const schema = yup.object().shape({
   email: yup
@@ -56,7 +58,10 @@ const resolvers: ResolverMap = {
         password: hashedPassword
       });
       await user.save();
-      await user.createConfirmationLink(url, redis);
+      const confirmationLink = await user.createConfirmationLink(url, redis);
+      if (NODE_ENV !== "test") {
+        await sendEmail(email, confirmationLink);
+      }
       return null;
     }
   }
