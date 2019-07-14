@@ -1,7 +1,11 @@
-import { SPARKPOST_API_KEY } from "../process-variables";
+import { SPARKPOST_API_KEY, NODE_ENV } from "../process-variables";
 import * as SparkPost from "sparkpost";
 
-const client = new SparkPost(SPARKPOST_API_KEY);
+let key = "123";
+if (NODE_ENV !== "test") {
+  key = SPARKPOST_API_KEY;
+}
+const client = new SparkPost(key);
 
 export const sendEmail = async (recipient: string, url: string) => {
   const response = await client.transmissions.send({
