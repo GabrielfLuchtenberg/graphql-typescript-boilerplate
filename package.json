@@ -4,13 +4,16 @@
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.0",
     "@types/ioredis": "^4.0.12",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.7",
+    "@types/node-fetch": "^2.3.7",
     "@types/uuid": "^3.4.4",
     "@types/yup": "^0.26.16",
     "gql2ts": "^1.10.1",
     "jest": "^24.8.0",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1",
     "start-server-and-test": "^1.9.1",
     "ts-jest": "^24.0.2",
@@ -20,7 +23,9 @@
     "typescript": "^3.5.1"
   },
   "dependencies": {
+    "@gql2ts/from-schema": "^1.10.1",
     "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
     "graphql": "^14.3.1",
     "graphql-import": "^0.7.1",
     "graphql-request": "^1.8.2",
@@ -35,9 +40,10 @@
   },
   "scripts": {
     "start": "NODE_ENV=dev nodemon --exec ts-node --files src/index.ts",
-    "build-schema": "gql2ts src/schema.graphql -o src/types/schema.d.ts",
+    "build-schema": "TS_NODE_FILES=true ts-node src/scripts/create-types.ts",
     "db:start": "docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres",
-    "test": "NODE_ENV=test TS_NODE_FILES=true jest --forceExit",
+    "test": "NODE_ENV=test TS_NODE_FILES=true jest --forceExit --runInBand.",
+    "test:watch": "NODE_ENV=test TS_NODE_FILES=true jest --watch --runInBand.",
     "test:db-start": "docker run --rm --name pg-docker-test -e POSTGRES_DB=postgres-test -e POSTGRES_PASSWORD=docker -d -p 5433:5432 -v $HOME/docker/volumes/postgres-test:/var/lib/postgresql/data postgres"
   }
 }

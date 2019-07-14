@@ -1,6 +1,6 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from "typeorm";
 import { Redis } from "ioredis";
-import uuid = require("uuid/v4");
+import { createEmailConfirmationLink } from "../utils/create-email-confirmation-link";
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
@@ -16,9 +16,6 @@ export class User extends BaseEntity {
   confirmed: boolean;
 
   createConfirmationLink(url: string, redis: Redis) {
-    const id = uuid();
-    redis.set(id, this.id, "ex", 60 * 60 * 24);
-
-    return `${url}/confirm/${id}`;
+    return createEmailConfirmationLink(url, this.id, redis);
   }
 }
