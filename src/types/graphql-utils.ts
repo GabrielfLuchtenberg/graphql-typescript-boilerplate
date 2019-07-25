@@ -11,6 +11,7 @@ export type Resolver = (
   context: { redis: Redis; url: string; session: Session },
   info: any
 ) => any;
+
 export type GraphqlMiddlewareFunc = (
   resolver: Resolver,
   parent: any,
